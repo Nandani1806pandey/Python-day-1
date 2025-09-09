@@ -29,16 +29,17 @@ print(game_images[user_choice])
 computer_choice = random.randint(0,2)
 print("Computer chose: ")
 print(game_images[computer_choice])
-print(f"Computer chose {computer_choice}")
-if computer_choice < user_choice:
-    print("You win!")
-if computer_choice > user_choice:
-    print("You Lose!!")
-elif user_choice == 0 and computer_choice == 2:
+print(f"Computer chose: {computer_choice}")
+if user_choice == 0 and computer_choice == 2:
     print("You wins!")
 elif user_choice == 2 and computer_choice == 0:
     print("You Lose!")
+elif computer_choice < user_choice:
+    print("You win!")
+elif computer_choice > user_choice:
+    print("You Lose!!")
 elif computer_choice == user_choice:
     print("It's a Drow! ")
+
 else:
     print("You typed an invalid number. You lose!")
