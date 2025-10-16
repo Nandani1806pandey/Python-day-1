@@ -1,11 +1,13 @@
 import sys
 sys.path.append(r"C:\Users\pande\AppData\Roaming\Python\Python312\site-packages")
 from tkinter import *
+from tkinter import Tk, Canvas
 from tkinter import messagebox
 from random import choice, randint, shuffle
 import pyperclip
 import json
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk, ImageDraw
+import os
 
 def generate_password():
     letters = ['a', 'b','c','d', 'e','f','g', 'h','i','j', 'k','l','m', 'n','o','p', 'q','r','s', 't','u','v', 'w','x','y', 'z','A','B', 'C','D','E', 'F','G','H', 'I','J','K', 'L','M','N', 'O','P','Q', 'R','S','T', 'U','V','W', 'X','Y','Z']
@@ -62,16 +64,25 @@ def find_password():
                 email = data[website]["email"]
                 password = data[website]["password"]
                 messagebox.showinfo(title=website, message=f"Email: {email}\nPassword: {password}")
+            else:
+                messagebox.showinfo(title="Error", message=f"No details for {website} found.")
 
 window = Tk()
 window.title("Password Manager")
 window.config(padx =50, pady=50)
 
-canvas = Canvas(heigh = 200, width=200)
-logo_image = PhotoImage(file=r"C:\Users\pande\OneDrive\Desktop\nandani\Python\Python-day-1\logo_image.png")
-img = image.resize((200,200))
-logo_image =ImageTk.PhotoImage(img)
-canvas.create_image(100, 100, image=logo_image)
+canvas = Canvas(window, heigh = 200, width=200)
+
+logo_image = PhotoImage(file=r"C:\Users\pande\OneDrive\Desktop\nandani\Python\16_python\logo_image.png")
+
+if os.path.exists(logo_image):
+    img = Image.open(logo_image)
+    img = img.resize((200,200))
+    logo_image =ImageTk.PhotoImage(img)
+    canvas.create_image(100, 100, image=logo_image)
+else:
+    print(f"Warning: Logo image not fount at {logo_image}")
+
 canvas.grid(row=0, column=1)
 
 #Labels
@@ -99,5 +110,6 @@ generate_password_button = Button(text="Generate Password", command = generate_p
 generate_password_button.grid(row=3, column = 2)
 add_button = Button(text = "Add", width = 36, command = save)
 add_button.grid(row = 4, column = 1, columnspan=2)
+
 
 window.mainloop()
